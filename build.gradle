@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.example.studentmind'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.studentmind"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        // сюда подхватим API-ключ из local.properties
+        buildConfigField "String", "GOOGLE_AI_API_KEY", "\"${GOOGLE_AI_API_KEY}\""
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15"
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:1.15.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
+    implementation "androidx.activity:activity-compose:1.10.0"
+
+    // Compose BOM
+    implementation platform("androidx.compose:compose-bom:2024.10.01")
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-tooling-preview"
+    implementation "androidx.compose.material3:material3"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7"
+
+    // Room
+    implementation "androidx.room:room-runtime:2.6.1"
+    implementation "androidx.room:room-ktx:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
+
+    // Google AI (Gemini)
+    implementation "com.google.ai.client.generativeai:generativeai:0.9.0"
+
+    // Для уведомлений (NotificationCompat)
+    implementation "androidx.core:core-ktx:1.15.0"
+
+    debugImplementation "androidx.compose.ui:ui-tooling"
+    debugImplementation "androidx.compose.ui:ui-test-manifest"
+}
